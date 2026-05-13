@@ -212,7 +212,7 @@ For a streaming platform like NOICE, this translates directly to:
 **Luthfi Mirza Darsono**  
 Gunadarma University — Information Systems  
 📧 luthfimirza2004@gmail.com  
-🔗 [LinkedIn](https://linkedin.com/in/luthfi-mirza-darsono) | [GitHub](https://github.com/LuthfiMirza)
+🔗 [LinkedIn](https://www.linkedin.com/in/luthfi-mirza-darsono-675663242/) | [GitHub](https://github.com/LuthfiMirza)
 
 ## 📄 License
 
