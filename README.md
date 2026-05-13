@@ -59,6 +59,10 @@ streaming-eda-data-story/
 
 > Preview snapshots from the full-scale synthetic dataset: **2,000 users · 500 content items · 50,000 interaction events**.
 
+### Streamlit Dashboard
+
+![Streamlit Dashboard Preview](visuals/streamlit_dashboard_preview.png)
+
 ### Retention Cohort
 
 ![Retention](visuals/retention_cohort.png)
