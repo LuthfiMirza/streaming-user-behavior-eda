@@ -6,8 +6,10 @@
 ![Status](https://img.shields.io/badge/Status-Portfolio%20Ready-1DB954?style=for-the-badge)
 
 ## 🖥️ Live Dashboard
-> Deploy to Streamlit Cloud: [streamlit.io/cloud](https://streamlit.io/cloud)  
-> Connect repo → set Main file: `streamlit_app/app.py`
+🚀 **Open the interactive Streamlit dashboard:**  
+👉 [streaming-user-behavior-eda-fpxbmrvygfyrcqvpflpykj.streamlit.app](https://streaming-user-behavior-eda-fpxbmrvygfyrcqvpflpykj.streamlit.app/)
+
+Explore content performance, user segmentation, retention signals, and growth opportunities through a 4-page interactive dashboard built with Streamlit and Plotly.
 
 # 📊 Streaming Platform User Behavior Analysis
 ### *A Data Story on Content Consumption, Retention, and Growth Opportunities*
@@ -53,11 +55,25 @@ streaming-eda-data-story/
 └── README.md
 ```
 
-## 📸 Visual Previews
+## 📸 Dashboard Preview
+
+> Preview snapshots from the full-scale synthetic dataset: **2,000 users · 500 content items · 50,000 interaction events**.
+
+### Retention Cohort
 
 ![Retention](visuals/retention_cohort.png)
-![RFM](visuals/rfm_bubble.png)  
+
+### User Segmentation
+
+![RFM](visuals/rfm_bubble.png)
+
+### Session Funnel
+
 ![Funnel](visuals/session_funnel.png)
+
+### Content Performance
+
+![Duration vs Completion](visuals/duration_vs_completion.png)
 
 ## 📦 Datasets Used
 
