@@ -1,3 +1,14 @@
+<!-- BADGES -->
+![Python](https://img.shields.io/badge/Python-3.10%2B-3776AB?style=for-the-badge&logo=python&logoColor=white)
+![Pandas](https://img.shields.io/badge/Pandas-EDA-150458?style=for-the-badge&logo=pandas&logoColor=white)
+![Streamlit](https://img.shields.io/badge/Streamlit-Dashboard-FF4B4B?style=for-the-badge&logo=streamlit&logoColor=white)
+![Plotly](https://img.shields.io/badge/Plotly-Interactive%20Charts-3F4F75?style=for-the-badge&logo=plotly&logoColor=white)
+![Status](https://img.shields.io/badge/Status-Portfolio%20Ready-1DB954?style=for-the-badge)
+
+## 🖥️ Live Dashboard
+> Deploy to Streamlit Cloud: [streamlit.io/cloud](https://streamlit.io/cloud)  
+> Connect repo → set Main file: `streamlit_app/app.py`
+
 # 📊 Streaming Platform User Behavior Analysis
 ### *A Data Story on Content Consumption, Retention, and Growth Opportunities*
 
@@ -41,6 +52,12 @@ streaming-eda-data-story/
 ├── .gitignore
 └── README.md
 ```
+
+## 📸 Visual Previews
+
+![Retention](visuals/retention_cohort.png)
+![RFM](visuals/rfm_bubble.png)  
+![Funnel](visuals/session_funnel.png)
 
 ## 📦 Datasets Used
 
