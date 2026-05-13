@@ -1,3 +1,4 @@
 # Report
 
-Place the stakeholder-ready PDF or slide export here, for example `data_story_summary.pdf`.
+- `data_story_summary.md` — Full narrative summary with findings and recommendations
+- To export as PDF: open in any Markdown viewer and print to PDF

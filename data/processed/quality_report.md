@@ -7,7 +7,7 @@ Synthetic NOICE-style raw CSVs were inspected, cleaned, merged, and feature-engi
 
 ### content
 
-- Shape: `10` rows × `7` columns
+- Shape: `500` rows × `7` columns
 - Duplicate rows: `0`
 
 **Schema**
@@ -30,7 +30,7 @@ Synthetic NOICE-style raw CSVs were inspected, cleaned, merged, and feature-engi
 
 ### interactions
 
-- Shape: `50` rows × `11` columns
+- Shape: `50,000` rows × `11` columns
 - Duplicate rows: `0`
 
 **Schema**
@@ -76,7 +76,7 @@ Synthetic NOICE-style raw CSVs were inspected, cleaned, merged, and feature-engi
 
 ### users
 
-- Shape: `20` rows × `8` columns
+- Shape: `2,000` rows × `8` columns
 - Duplicate rows: `0`
 
 **Schema**
@@ -102,15 +102,15 @@ Synthetic NOICE-style raw CSVs were inspected, cleaned, merged, and feature-engi
 ## Cleaning Actions
 
 ### content
-- Shape before: `(10, 7)`
-- Shape after: `(10, 7)`
+- Shape before: `(500, 7)`
+- Shape after: `(500, 7)`
 - Duplicates removed: `0`
 - Columns dropped for >30% missingness: `[]`
 - Imputations: `{}`
 
 ### interactions
-- Shape before: `(50, 11)`
-- Shape after: `(50, 11)`
+- Shape before: `(50000, 11)`
+- Shape after: `(50000, 11)`
 - Duplicates removed: `0`
 - Columns dropped for >30% missingness: `[]`
 - Imputations: `{}`
@@ -123,15 +123,15 @@ Synthetic NOICE-style raw CSVs were inspected, cleaned, merged, and feature-engi
 - Imputations: `{}`
 
 ### users
-- Shape before: `(20, 8)`
-- Shape after: `(20, 8)`
+- Shape before: `(2000, 8)`
+- Shape after: `(2000, 8)`
 - Duplicates removed: `0`
 - Columns dropped for >30% missingness: `[]`
 - Imputations: `{}`
 
 ## Processed Master Dataset
 - Output path: `data/processed/master_dataset.csv`
-- Shape: `50` rows × `48` columns
+- Shape: `50,000` rows × `48` columns
 - Duplicate rows: `0`
 - Remaining missing values: `0`
 

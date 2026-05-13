@@ -68,6 +68,8 @@ streaming-eda-data-story/
 | KKBox User Behavior | [Kaggle](https://www.kaggle.com/c/kkbox-churn-prediction-challenge) | Session logs, subscription data |
 | Synthetic Data (custom) | `data/generate_synthetic_data.py` | Simulated NOICE-style interaction logs |
 
+> **Demo scale:** 2,000 users · 500 content items · 50,000 interaction events (synthetic)
+
 > All datasets used for educational and portfolio purposes only.
 
 ## 🔍 Analysis Chapters
@@ -148,7 +150,7 @@ streaming-eda-data-story/
 ## ⚙️ Setup & Installation
 
 ```bash
-git clone https://github.com/yourusername/streaming-eda-data-story.git
+git clone https://github.com/LuthfiMirza/streaming-user-behavior-eda.git
 cd streaming-eda-data-story
 python -m venv venv
 source venv/bin/activate  # Windows: venv\Scripts\activate
@@ -181,7 +183,7 @@ For a streaming platform like NOICE, this translates directly to:
 - [x] User segmentation scaffolding
 - [x] Retention & drop-off analysis scaffolding
 - [x] Business recommendations framework
-- [ ] Interactive Streamlit dashboard
+- [x] Interactive Streamlit dashboard
 - [ ] Bahasa Indonesia version of executive summary
 - [ ] Integration with real public streaming datasets
 
@@ -190,7 +192,7 @@ For a streaming platform like NOICE, this translates directly to:
 **Luthfi Mirza Darsono**  
 Gunadarma University — Information Systems  
 📧 luthfimirza2004@gmail.com  
-🔗 [LinkedIn](https://linkedin.com/in/yourprofile) | [GitHub](https://github.com/yourusername)
+🔗 [LinkedIn](https://linkedin.com/in/luthfi-mirza-darsono) | [GitHub](https://github.com/LuthfiMirza)
 
 ## 📄 License
 
