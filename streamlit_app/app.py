@@ -52,21 +52,77 @@ def apply_global_styles() -> None:
     )
 
 
-@st.cache_data(show_spinner=False)
-def load_data() -> pd.DataFrame | None:
-    """Load master dataset and add compatibility columns used by the dashboard."""
-    if not DATA_PATH.exists():
-        return None
+def generate_synthetic_data(n_users: int = 200, n_content: int = 80, n_events: int = 2000) -> pd.DataFrame:
+    """Generate NOICE-style synthetic streaming data inline for cloud demos."""
+    rng = np.random.default_rng(42)
 
-    df = pd.read_csv(DATA_PATH)
+    genres = ["Pop", "Rock", "Jazz", "Talk Show", "Tech", "Comedy", "News", "EDM", "R&B", "Classical"]
+    formats = ["podcast", "music", "livestream"]
+    devices = ["mobile", "desktop", "tablet"]
+    channels = ["search", "recommendation", "browse", "social"]
+    times_of_day = ["morning", "afternoon", "evening", "night"]
+    days = DAY_ORDER
+    plans = ["free", "premium", "family"]
+
+    user_ids = [f"U{str(index).zfill(4)}" for index in range(n_users)]
+    content_ids = [f"C{str(index).zfill(4)}" for index in range(n_content)]
+
+    rows = []
+    for _ in range(n_events):
+        user_id = rng.choice(user_ids)
+        content_id = rng.choice(content_ids)
+        duration_minutes = int(rng.choice([5, 15, 30, 60], p=[0.3, 0.4, 0.2, 0.1]))
+        session_duration = min(duration_minutes * rng.uniform(0.3, 1.1), duration_minutes)
+        timestamp = pd.Timestamp("2024-01-01") + pd.Timedelta(days=int(rng.integers(0, 90)), hours=int(rng.integers(0, 24)))
+
+        rows.append({
+            "user_id": user_id,
+            "content_id": content_id,
+            "session_id": f"S{rng.integers(100000, 999999)}",
+            "timestamp": timestamp,
+            "started_at": timestamp,
+            "genre": rng.choice(genres),
+            "format": rng.choice(formats, p=[0.4, 0.4, 0.2]),
+            "duration_minutes": duration_minutes,
+            "session_duration_minutes": round(float(session_duration), 2),
+            "is_completed": bool(session_duration >= duration_minutes * 0.8),
+            "skip_count": int(rng.poisson(1.5)),
+            "device": rng.choice(devices, p=[0.6, 0.3, 0.1]),
+            "acquisition_channel": rng.choice(channels),
+            "time_of_day": rng.choice(times_of_day),
+            "day_of_week": rng.choice(days),
+            "user_tenure_days": int(rng.integers(0, 90)),
+            "subscription_plan": rng.choice(plans, p=[0.5, 0.4, 0.1]),
+            "monthly_searches": int(rng.integers(10, 500)),
+            "play_count": int(rng.integers(1, 20)),
+        })
+
+    df = pd.DataFrame(rows)
+    total_playtime = df.groupby("user_id")["session_duration_minutes"].sum()
+    threshold = total_playtime.quantile(0.8)
+    power_users = total_playtime[total_playtime >= threshold].index
+    df["is_power_user"] = df["user_id"].isin(power_users)
+    return df
+
+
+@st.cache_data(show_spinner=False)
+def load_or_generate_data() -> pd.DataFrame:
+    """Load the committed dataset when available, otherwise generate demo data."""
+    if DATA_PATH.exists():
+        df = pd.read_csv(DATA_PATH)
+    else:
+        st.info("⚙️ Generating synthetic dataset for demo...")
+        df = generate_synthetic_data()
+
     if "play_count" not in df.columns:
         df["play_count"] = 1
     if "skip_count" not in df.columns:
         df["skip_count"] = df["skipped"].astype(int) if "skipped" in df.columns else 0
     if "is_completed" in df.columns:
         df["is_completed"] = df["is_completed"].astype(bool)
-    if "started_at" in df.columns:
-        df["started_at"] = pd.to_datetime(df["started_at"], errors="coerce")
+    for date_column in ["timestamp", "started_at"]:
+        if date_column in df.columns:
+            df[date_column] = pd.to_datetime(df[date_column], errors="coerce")
     return df
 
 
@@ -183,8 +239,11 @@ def overview_page(df: pd.DataFrame) -> None:
             fig.update_layout(template="plotly_dark")
             st.plotly_chart(fig, use_container_width=True)
 
-    freshness = df["started_at"].max().date() if "started_at" in df.columns and df["started_at"].notna().any() else "unknown"
-    st.markdown(f'<p class="small-note">Data freshness: latest event date = <b>{freshness}</b>. Source: <code>{DATA_PATH.name}</code>.</p>', unsafe_allow_html=True)
+    date_column = "started_at" if "started_at" in df.columns else "timestamp" if "timestamp" in df.columns else None
+    freshness = df[date_column].max().date() if date_column and df[date_column].notna().any() else "unknown"
+    if not DATA_PATH.exists():
+        st.caption("📌 Running on auto-generated demo data (200 users, 2000 events)")
+    st.markdown(f'<p class="small-note">Data freshness: latest event date = <b>{freshness}</b>. Source: <code>{DATA_PATH.name if DATA_PATH.exists() else "inline demo generator"}</code>.</p>', unsafe_allow_html=True)
 
 
 def content_page(df: pd.DataFrame) -> None:
@@ -300,11 +359,7 @@ def main() -> None:
     st.sidebar.divider()
     st.sidebar.caption("Built by Luthfi Mirza Darsono | Gunadarma University")
 
-    df = load_data()
-    if df is None:
-        st.error("Master dataset not found. Please run the data pipeline first.")
-        st.code("python data/generate_synthetic_data.py\npython data/process_data_foundation.py", language="bash")
-        return
+    df = load_or_generate_data()
 
     required_base = ["user_id", "content_id", "session_id", "session_duration_minutes", "is_completed", "is_power_user"]
     if not require_columns(df, required_base):
